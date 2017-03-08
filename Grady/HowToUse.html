@@ -6,11 +6,13 @@
 		<link rel="stylesheet" type="text/css" href="grady.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
-            
-            
-            $('#Intro').click(function(){
-                $("p").toggle();
+            $(document).ready(function(){
+                
+                $(".command").click(function(){
+                    $(this).find("p").toggle();
+                });
             });
+            
         </script>
 	</head>
 	<body>
@@ -36,21 +38,27 @@
             <h2>Introduction to Grady</h2>
                 <p>
                    Grady includes a Surface and Core Repl allowing users to experience the language from both a high and 
-                   low level.  The Repl provides typechecking
+                   low level.  The Repl provides typechecking and evaluation
                    of terms with helpful error messages, helping new users become accustomed to the language syntax.  We 
                    recommend that new users start with the Surface Repl as its syntax is simpler.
                    Additionally, Grady is a highly expressive language allowing everything from programming in 
                    untyped lambda-calculus to polymorphism.  
+                </p>
+                <p>
+                    Click on any of the Grady elements below to see their description and examples.
                 </p>
             </div>
 			<div id="Replcmds">
                 <h2>Repl Commands - Both Repls</h2>
                 <div class="command">
                     <h3>:help (:h)</h3>
-                    <p>
-                       At any time in the Repl use this command to enter into the help menu.  From here you 
-                       will see a list of all commands available.
-                    </p>
+                    <div class="description" >
+                    <!-- style="display: none" -->
+                        <p>
+                           At any time in the Repl use this command to enter into the help menu.  From here you 
+                           will see a list of all commands available.
+                        </p>
+                    </div>
                 </div>
                 <div class="command">
                     <h3>:type (:t) &lt;term&gt;</h3>
@@ -77,7 +85,7 @@
                     <h3>:dump (:d)</h3>
                     <p>
                        The dump command will display the terms in the context.  These will be displayed in the form
-                       "let &lt;variable&gt; = &lt;term&gt;"
+                       <strong>let &lt;variable&gt; = &lt;term&gt;</strong>
                     </p>
                 </div>
                 <div class="command">
@@ -95,19 +103,21 @@
                 <h2>Syntactic Types</h2>
                 <div class="command">
                     <h3>Type Variable Binding</h3>
+                    <div class="description">
+                        <p>
+                        <strong>let &lt;variable name&gt; = &lt;type&gt;</strong><br>
+                           Binding a type to a variable is done with a "let" statement.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command.                         
+                           All bindings must typecheck.
+                        </p>
+                    </div>
+                </div>
+                <!-- Do we need to dislay this one??? -->
+                <div class="command">
+                    <h3>Simple</h3>
                     <p>
-                    <strong>let &lt;variable name&gt; = &lt;type&gt;</strong><br>
-                       Binding a type to a variable is done with a "let" statement.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command.                         
-                       All bindings must typecheck.
+                       Universe of simple types
                     </p>
                 </div>
-                <!-- Do we need this one displayed???
-                <div class="command"> -->
-                    <!-- <h3>Simple</h3> -->
-                    <!-- <p> -->
-                       <!-- Universe of simple types -->
-                    <!-- </p> -->
-                <!-- </div> -->
                 <div class="command">
                     <h3>Natural Number Type</h3>
                     <p>
@@ -118,15 +128,15 @@
                 <div class="command">
                     <h3>Unit Type</h3>
                     <p>
-                       <strong>Unit</strong>
+                       <strong>Unit</strong><br>
+                       The terminal object.
                     </p>
                 </div>
                 <div class="command">
                     <h3>Untyped</h3>
                     <p>
                        <strong>?</strong> <br>
-                       This type represents the an element in the untyped universe.<br>
-                       <strong>Note: </strong>This is only used in the Core Repl.
+                       This type represents an element in the untyped universe.<br>
                     </p>
                 </div>
                 <div class="command">
@@ -135,13 +145,16 @@
                         <strong>&lt;type&gt; -> &lt;type&gt;</strong> <br>
                        This type allows Grady to represent functions using an arrow. 
                     </p>
+                    <p class="example">
+                        Example:<br>
+                         <strong>\(f:Nat -> Nat)</strong><br>
+                         <strong>f</strong> is a function that takes in a <strong>Nat</strong> and returns a <strong>Nat</strong>
+                    </p>
                 </div>
                 <div class="command">
                     <h3>Product Type</h3>
                     <p>
-                       <strong>(&lt;type&gt;,&lt;type&gt;)</strong> <br>
-                       The product type takes two elements and maintains them
-                       as a tuple.
+                       
                     </p>
                 </div>
                 <div class="command">
@@ -150,7 +163,11 @@
                        <strong>[&lt;term&gt;]</strong><br>
                        In Grady you may use lists using the List type, with
                        items in the list separated by commas.  All items in the list must have the same type.
-                       <strong>Note: </strong>This is only used in the Surface Repl.
+                    </p>
+                    <p class="example">
+                        Example:<br>
+                        <strong>:t [9,5]</strong><br>
+                        Gives the result: <strong>[Nat]</strong>
                     </p>
                 </div>
                 <div class="command">
@@ -166,7 +183,7 @@
                     <h3>Term Variable Binding</h3>
                     <p>
                     <strong>let &lt;variable name&gt; = &lt;term&gt;</strong><br>
-                       Binding a type to a variable is done with a "let" statement.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command.                         
+                       Binding a type to a variable is done with a <strong>let</strong> statement.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command.                         
                        All bindings must typecheck.
                     </p>
                 </div>
@@ -179,13 +196,26 @@
                 <div class="command">
                     <h3>Box</h3>
                     <p>
-                    
+                        <strong>box&lt;type&gt;</strong><br>
+                        Box is a function that takes the given type and inserts it into the untyped universe.
+                    </p>
+                    <p class="example">
+                    Example:<br>
+                    <strong>:t \(m:Nat)-> box&lt;Nat&gt; m</strong><br>
+                    Gives the result: <strong>Nat -> ?</strong>
                     </p>
                 </div>
                 <div class="command">
                     <h3>Unbox</h3>
-                    <p>
-                    
+                    <p >
+                        <strong>unbox&lt;term&gt;</strong><br>
+                        Unbox is a function that extracts the given type from the untyped universe.<br>
+                        
+                    </p>
+                    <p class="example">
+                        Example:<br>
+                        <strong>:t \(m:?)-> unbox&lt;Nat&gt; m</strong><br>
+                        Gives the result: <strong>? -> Nat</strong>
                     </p>
                 </div>
                 <div class="command">
@@ -203,7 +233,12 @@
                 <div class="command">
                     <h3>Application</h3>
                     <p>
-                    
+                        Grady applies a function to an argument with a space in between the function and the argument.
+                    </p>
+                    <p class="example">
+                        Example:<br>
+                         <strong>:t \(m:Nat) -> \(f:Nat -> Nat) -> f m</strong><br>
+                        Gives the result: <strong>Nat -> (Nat -> Nat) -> Nat</strong>
                     </p>
                 </div>
                 <div class="command">
@@ -215,25 +250,53 @@
                 <div class="command">
                     <h3>Pair</h3>
                     <p>
-                    
+                    <strong>(&lt;type&gt;,&lt;type&gt;)</strong> <br>
+                       The product type takes two elements and maintains them
+                       as a tuple.  The elements may be different types.
+                    </p>
+                    <p class="example">
+                        <strong>:t \(m:(Nat,?)) -> fst m</strong><br>
+                        Gives the result: <strong>(Nat,?) -> Nat</strong>
                     </p>
                 </div>
                 <div class="command">
                     <h3>First Projection</h3>
                     <p>
-                    
+                        <strong>fst</strong><br>
+                        This returns the first projection of a pair.
+                    </p>
+                    <p class="example">
+                        <strong>:t \(m:(Nat,?)) -> fst m</strong><br>
+                        Gives the result: <strong>(Nat,?) -> Nat</strong>
                     </p>
                 </div>
                 <div class="command">
                     <h3>Second Projection</h3>
                     <p>
-                    
+                        <strong>snd</strong><br>
+                        This returns the second projection of a pair.
+                    </p>
+                    <p class="example">
+                        <strong>:t \(m:(Nat,?)) -> fst m</strong><br>
+                        Gives the result: <strong>(Nat,?) -> ?</strong>
                     </p>
                 </div>
                 <div class="command">
                     <h3>Successor</h3>
                     <p>
-                    
+                        <strong>succ term</strong><br>
+                        This returns the successor value of the given term.
+                    </p>
+                    <p class="example">
+                        Example:<br>
+                        <strong> succ 8</strong><br>
+                        Gives the result: <strong>9</strong>
+                    </p>
+                    <p class="example">
+                        Example: <br>
+                        <strong>:t \(m:Nat) -> succ m</strong><br>
+                        Gives the result: <strong>Nat -> Nat</strong>
+                    </p>
                     </p>
                 </div>
                 <div class="command">
@@ -251,13 +314,20 @@
                 <div class="command">
                     <h3>Empty List</h3>
                     <p>
-                    
+                        <strong>[]</strong><br>
+                        An empty list is denoted as such.  All elements it holds must be of the same type.
                     </p>
                 </div>
                 <div class="command">
                     <h3>Cons</h3>
                     <p>
-                    
+                        <strong>term::[term]</strong><br>
+                        Cons concatenates a term of a specific type with a list of terms of the same type.
+                    </p>
+                    <p class="example">
+                        Example:<br>
+                        <strong>8::[9,10]</strong><br>
+                        Gives the result: <strong>[8,9,10]</strong>
                     </p>
                 </div>
                 <div class="command">
@@ -269,13 +339,32 @@
                 <div class="command">
                     <h3>Split</h3>
                     <p>
-                    <strong>Note: </strong>This is only used in the Core Repl.
+                        <strong>split&lt;? -> ?&gt;</strong><br>
+                        This function takes an element of type <strong>?</strong> can splits it into a function that
+                        takes an element of type <strong>?</strong> and returns an element of type <strong>?</strong>.
+                    </p>
+                    <p class="example">
+                        Example:<br>
+                        <strong>:t \(m:? ) -> split&lt;? -> ?&gt; m</strong><br>
+                        Gives the result: <strong>? -> ? -> ?</strong>
+                    </p>
+                    <p class="example" style="display: none">
+                        <strong>Note: </strong>This is only used in the Core Repl.
                     </p>
                 </div>
                 <div class="command">
                     <h3>Squash</h3>
                     <p>
-                    <strong>Note: </strong>This is only used in the Core Repl.
+                        <strong>squash&lt;? -> ?&gt;</strong><br>
+                        Squash takes a function of type <strong>&lt;? -> ?&gt;</strong> and return an element of type <strong>?</strong>
+                    </p>
+                    <p class="example">
+                        Example: <br>
+                        <strong>:t \(m:? -> ?) -> squash&lt;? -> ?&gt; m</strong><br>
+                        Gives the result: <strong>(? -> ?) -> ?</strong>
+                    </p>
+                    <p class="example" style="display: none">
+                        <strong>Note: </strong>This is only used in the Core Repl.
                     </p>
                 </div>
             </div>

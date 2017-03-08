@@ -150,3 +150,11 @@ nav a:hover{
 	padding: 5px 10px 5px 10px;
 	overflow: auto;
 }
+
+.command p{
+    display: none;
+}
+
+.example{
+    border-top: 1px solid #2C3E50;
+}
