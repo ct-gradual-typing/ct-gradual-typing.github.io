@@ -4,6 +4,16 @@
 		<title>Examples</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="grady.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                
+                $(".examples").click(function(){
+                    $(this).find("p").toggle();
+                });
+            });
+            
+        </script>
 	</head>
 	<body>
 	<div id="wrapper">
@@ -24,7 +34,242 @@
 			</ul>
 		</nav>
 		<main>
-			
+			<div id="examplesIntro">
+                <!-- <h2>Examples Using Grady</h2> -->
+                <p>
+                    Below are several examples that will help the user see Grady's syntax in use.  These examples 
+                    demonstrate Grady's versatility and features.
+                </p>
+                <p>
+                    The format for the examples is that the first line has the name and its type.  The second line has the 
+                    definition.  This format matches the same format as files that you can import into Grady.  Also like imported files, some definitions have dependent definitions that must be defined previously.  A good example of this is the definition for <strong>exp</strong>.  It depends on <strong>squash_num</strong> being defined first.
+                </p>
+            </div>
+            <div id="churchEncodings">
+                <h2>Church Encodings</h2>
+                <div id="boolExamples" class="examples">
+                    <h3>Booleans</h3>
+                    <p class="churchExample">
+                        true : ? -> ? -> ?<br>
+                        true = \(p:?)->\(q:?)->p
+                    </p>
+                    <p class="churchExample">
+                        false : ? -> ? -> ?<br>
+                        false = \(p:?)->\(q:?)->q
+                    </p>
+                </div>
+                <div id="listsExamples" class="examples">
+                    <h3>Lists</h3>
+                    <p class="churchExample">
+                        cons : ? -> ? -> (? -> ? -> ?) -> ?<br>
+                        cons = \(x:?)->\(y:?)->\(z:? -> ? -> ?)->(z x y)
+                    </p>
+                    <p class="churchExample">
+                        first : ((? -> ? -> ?) -> ?) -> ?<br>
+                        first = \(p : (? -> ? -> ?) -> ?)->p true
+                    </p>
+                    <p class="churchExample">
+                        second : ((? -> ? -> ?) -> ?) -> ?<br>
+                        second = \(p:(? -> ? -> ?) -> ?)->p false
+                    </p>
+                    <p class="churchExample">
+                        head : ((? -> ? -> ?) -> ?) -> ?<br>
+                        head = first
+                    </p>
+                    <p class="churchExample">
+                        tail : ((? -> ? -> ?) -> ?) -> ?<br>
+                        tail = \(p:(? -> ? -> ?) -> ?)->p false
+                    </p>
+                    <p class="churchExample">
+                        nil : ? -> ? -> ?<br>
+                        nil = \(p:?)->\(q:?)->q
+                    </p>
+                    <p class="churchExample">
+                        list : ? -> ? -> (? -> ? -> ?) -> ?<br>
+                        list = \(m:?)->\(n:?)->cons m n
+                    </p>
+                    <p class="churchExample">
+                        list4 : ? -> ? -> ? -> ? -> (? -> ? -> ?) -> (? -> ? -> ?) -> (? -> ? -> ?) -> ?<br>
+                        list4 = \(r:?)->\(s:?)->\(t:?)->\(u:?)->\(elem1:? -> ? -> ?)->\(elem2:? -> ? -> ?)->\(elem3:? -> ? -> ?)->(list (list r s elem1) (list t u elem2) elem3)
+                    </p>
+                </div>
+                <div id="numbersExamples" class="examples">
+                    <h3>Natural Numbers</h3>
+                    <p class="churchExample">
+                        zero : (? -> ?) -> ? -> ?<br>
+                        zero = \(s:? -> ?)->\(z:?)-> z<br>
+                    </p>
+                    <p class="churchExample">
+                        one : (? -> ?) -> ? -> ?<br>
+                        one = \(s:? -> ?)->\(z:?)->s z<br>
+                    </p>
+                    <p class="churchExample">
+                        two : (? -> ?) -> ? -> ?<br>
+                        two = \(s:? -> ?) -> \(z:?) -> s (s z)<br>
+                    </p>
+                    <p class="churchExample">
+                        three : (? -> ?) -> ? -> ?<br>
+                        three = \(s:? -> ?) -> \(z:?) -> s (s (s z))<br>
+                    </p>
+                </div>
+                <div id="operationsExamples" class="examples">
+                    <h3>Math Operations</h3>
+                    <p class="churchExample">
+                        suc : ((? -> ?) -> ? -> ?) -> (? -> ?) -> ? -> ?<br>
+                        suc = \(m:(? -> ?) -> ? -> ?) -> \(f:? -> ?) -> \(x:?) -> f (m f x)
+                    </p>
+                    <p class="churchExample">
+                        add : ((? -> ?) -> ? -> ?) -> ((? -> ?) -> ? -> ?) -> (? -> ?) -> ? -> ?<br>
+                        add = \(m:(? -> ?) -> ? -> ?) -> \(n:(? -> ?) -> ? -> ?)->\(f:? -> ?)->\(x:?)-> m f (n f x)
+                    </p>
+                    <p class="churchExample">
+                        multiply : ((? -> ?) -> ? -> ?) -> ((? -> ?) -> ? -> ?) -> (? -> ?) -> ? -> ?<br>
+                        multiply =  \(m:(? -> ?) -> ? -> ?) -> \(n:(? -> ?) -> ? -> ?)-> \(f:? -> ?) -> m (n f)
+                    </p>
+                    <p class="churchExample">
+                        squash_num : ((? -> ?) -> ? -> ?) -> (? -> ?)<br>
+                        squash_num = \(x : (? -> ?) -> ? -> ?) -> \(y:?)-> squash<? -> ?> (\(z:?) -> x (split<? -> ?> y) z)
+                    </p>
+                    <p class="churchExample">
+                        exp : ((? -> ?) -> ? -> ?) -> ((? -> ?) -> ? -> ?) -> (? -> ?) -> ? -> ?<br>
+                        exp = \(m:(? -> ?) -> ? -> ?) -> \(n:(? -> ?) -> ? -> ?) -> \(s:? -> ?) -> \(z:?) -> (split<? -> ?> (n (squash_num m) (squash<? -> ?> s))) z
+                    </p>
+                </div>
+            </div>
+            <div id="iteratingExamples" class="examples">
+                <h2>Iterating</h2>
+                <p class="churchExample">
+                    omega : ? -> ?<br>
+                    omega = \(x : ?) -> (x x)
+                </p>
+                <p class="churchExample">
+                    loop : ?<br>
+                    loop = omega omega
+                </p>
+                <p class="churchExample">
+                    ycomb : (? -> ?) -> ?<br>
+                    ycomb = \(f : ? -> ?) -> omega (\(x:?) -> f (x x))
+                </p>
+                <p class="churchExample">
+                    fix : forall (X <: Simple).((X -> X) -> X)<br>
+                    fix = \(X <: Simple) -> \(f:X -> X) -> unbox<X> (ycomb (\(x:?) -> (f x)))
+                </p>
+            </div>
+            <div id="polymorphismExamples" class="examples">
+                <h2>Polymorphism</h2>
+                <p class="churchExample">
+                    id : forall (X<:?).(X -> X)<br>
+                    id = \(X<:?) -> \(x:X) -> x
+                </p>
+                <p class="churchExample">
+                    generalBox : forall (X<:Nat).(X -> ?)<br>
+                    generalBox = \(X<:Nat) -> box<X>
+                </p>
+            </div>
+            <div id="mathContinued" class="examples">
+                <h2>Math (using case)</h2>
+                <p class="churchExample">
+                    pred : Nat -> Nat<br>
+                    pred = \(n:Nat) -> case n of 0 -> 0, (succ n') -> n'
+                </p>
+                <p class="churchExample">
+                    sub : Nat -> Nat -> Nat<br>
+                    sub = \(m:Nat) -> ([Nat -> Nat]fix)<br>
+                          &emsp;&emsp;&nbsp(\(r:Nat -> Nat) -><br>
+                           &emsp;&emsp;&nbsp\(n:Nat) -> case n of 0 -> m, (succ n') -> pred (r n'))
+                </p>
+                <p class="churchExample">
+                    add : Nat -> Nat -> Nat<br>
+                    add = \(m:Nat) -> ([Nat -> Nat]fix)<br>
+                          &emsp;&emsp;&nbsp(\(r:Nat -> Nat) -><br>
+                           &emsp;&emsp;&nbsp\(n:Nat) -> case n of 0 -> m, (succ n') -> succ (r n'))
+                </p>
+                <p class="churchExample">
+                    mult : Nat -> Nat -> Nat<br>
+                    mult = \(m:Nat) -> ([Nat -> Nat]fix)<br>
+                           &emsp;&emsp;&nbsp(\(r:Nat -> Nat) -><br>
+                            &emsp;&emsp;&nbsp\(n:Nat) -> case n of 0 -> 0, (succ n') -> add m (r n'))
+                </p>
+                <p class="churchExample">
+                    exp : Nat -> Nat -> Nat<br>
+                    exp = \(m:Nat) -> ([Nat -> Nat]fix)<br>
+                          &emsp;&emsp;&nbsp(\(r:Nat -> Nat) -><br>
+                           &emsp;&emsp;&nbsp\(n:Nat) -> case n of 0 -> 1, (succ n') -> mult m (r n'))
+                </p>
+            </div>
+            <div id="polyLists" class="examples">
+                <h2>Lists and Polymorphism</h2>
+                <p class="churchExample">
+                    tail : forall (X<:?).([X] -> [X])<br>
+                    tail = \(X<:?) -> \(l:[X]) -><br>
+                            &emsp;&emsp;case l of [] -> [X][], (h :: t) -> t
+                </p>
+                <p class="churchExample">
+                    append : forall (A <: Simple).([A] -> [A] -> [A])<br>
+                    append = \(A <: Simple) -><br>
+                    &emsp;&emsp;([[A] -> [A] -> [A]]fix)<br>
+                    &emsp;&emsp;(\(r1 : [A] -> [A] -> [A]) -> \(l1 : [A]) -> \(l2 : [A]) -><br>
+                    &emsp;&emsp;&emsp;&emsp;case l1 of<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;[] -> l2,<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;(a :: as) -> a :: (r1 as l2))
+                </p>
+                <p class="churchExample">
+                    length : forall (A <: Simple).([A] -> Nat)<br>
+                    length = \(A <: Simple) -> <br>
+                    &emsp;&emsp;([[A] -> Nat]fix)<br>
+                    &emsp;&emsp;(\(r : [A] -> Nat) -> \(l : [A]) -><br>
+                    &emsp;&emsp;&emsp;case l of<br>
+                    &emsp;&emsp;&emsp;&emsp;[] -> 0,<br>
+                    &emsp;&emsp;&emsp;&emsp;(a :: as) -> succ (r as))
+                </p>
+                <p class="churchExample">
+                    map : forall (A <: Simple).(forall (B <: Simple).((A -> B) -> ([A] -> [B])))<br>
+                    map = \(A <: Simple) -> \(B <: Simple) -> \(f : A -> B) -><br>
+                    &emsp;&emsp;([[A] -> [B]]fix)<br>
+                    &emsp;&emsp;(\(r : [A] -> [B]) -> \(l : [A]) -><br>
+                    &emsp;&emsp;&emsp;case l of<br>
+                    &emsp;&emsp;&emsp;&emsp;[] -> [B][],<br>
+                    &emsp;&emsp;&emsp;&emsp;(x :: xs) -> (f x) :: (r xs))
+                </p>
+                <p class="churchExample">
+                    foldr : forall (A <: Simple).(forall (B <: Simple).((A -> B -> B) -> B -> ([A] -> B)))<br>
+                    foldr = \(A <: Simple) -> \(B <: Simple) -> \(f : A -> B -> B) -> \(b : B) -><br>
+                    &emsp;&emsp;([[A] -> B]fix)<br>
+                    &emsp;&emsp;(\(r : [A] -> B) -> \(l : [A]) -><br>
+                    &emsp;&emsp;&emsp;case l of<br>
+                    &emsp;&emsp;&emsp;&emsp;[] -> b,<br>
+                    &emsp;&emsp;&emsp;&emsp;(a :: as) -> (f a (r as)))
+                </p>
+                <p class="churchExample">
+                    foldl : forall (A <: Simple).(forall (B <: Simple).((B -> A -> B) -> (B -> [A] -> B)))<br>
+                    foldl = \(A <: Simple) -> \(B <: Simple) -> \(f : B -> A -> B) -><br>
+                    &emsp;&emsp;([B -> [A] -> B]fix)<br>
+                    &emsp;&emsp;(\(r : B -> [A] -> B) -> \(b : B) -> \(l : [A]) -><br>
+                    &emsp;&emsp;&emsp;case l of<br>
+                    &emsp;&emsp;&emsp;&emsp;[] -> b,<br>
+                    &emsp;&emsp;&emsp;&emsp;(a :: as) -> r (f b a) as)
+                </p>
+                <p class="churchExample">
+                    reverse : forall (A <: Simple).([A] -> [A])<br>
+                    reverse = \(A <: Simple) -> \(l : [A]) -> ([[A]][A]foldl) (\(acc:[A]) -> \(x:A) -> x :: acc) ([A][]) l
+                </p>
+                <p class="churchExample">
+                    zipWith : forall (A <: Simple).(forall (B <: Simple).(forall (C <: Simple).((A -> B -> C) -> ([A] -> [B] -> [C]))))<br>
+                    zipWith = \(A <: Simple) -> \(B <: Simple) -> \(C <: Simple) -> \(f : A -> B -> C) -><br>
+                    &emsp;&emsp;([[A] -> [B] -> [C]]fix)<br>
+                    &emsp;&emsp;(\(r : [A] -> [B] -> [C]) -> \(l1 : [A]) -> \(l2 : [B]) -><br>
+                    &emsp;&emsp;&emsp;case l1 of<br>
+                    &emsp;&emsp;&emsp;&emsp;[] -> [C][],<br>
+                    &emsp;&emsp;&emsp;&emsp;(a :: as) -> case l2 of<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;[] -> [C][],<br>
+                    &emsp;&emsp;&emsp;&emsp;&emsp;(b :: bs) -> (f a b) :: (r as bs))
+                </p>
+                <p class="churchExample">
+                    zip : forall (A <: Simple).(forall (B <: Simple).([A] -> [B] -> [(A,B)]))<br>
+                    zip = \(A <: Simple) -> \(B <: Simple) -> \(l1 : [A]) -> \(l2 : [B]) -><br>
+                    &emsp;&emsp;([(A,B)][B][A]zipWith) (\(x : A) -> \(y : B) -> (x,y)) l1 l2
+                </p>
+            </div>
 		</main>
 		<footer>
 			Copyright &copy; 2017, Dr. Harley Eades, Michael Townsend
