@@ -176,3 +176,31 @@ nav a:hover{
 .section div{
     display:none;
 }
+
+.navRepl p{
+    padding: 0 25px 10px;
+}
+
+#gFiles p{
+    padding: 0 25px 10px;
+}
+
+#stackInstall p{
+    padding: 0 25px 10px;
+}
+
+#git p{
+    padding: 0 25px 10px;
+}
+
+.image{
+    padding: 0 25px 10px;
+}
+
+#gradyExamples p{
+    display:none;
+}
+
+#gradyExamples img{
+    display:none;
+}

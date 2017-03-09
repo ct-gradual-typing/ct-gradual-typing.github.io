@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Getting Started</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="grady.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                
+                $(".examples").click(function(){
+                    $(this).find("p").toggle();
+                });
+            });
+            
+        </script>
+	</head>
+	<body>
+	<div id="wrapper">
+		<header>
+            <h1><img  src="Images/logo_redBackground.png" alt="Grady Logo" width="250" height="57"></h1>
+		</header>
+		<nav>
+			<ul>
+				<li>
+					<a href="Index.html">Home</a>
+				</li>
+				<li>
+					<a href="HowToUse.html">How To Use Grady</a>
+				</li>
+				<li>
+					<a href="GettingStarted.html">Getting Started</a>
+				</li>
+			</ul>
+		</nav>
+		<main>
+        <div id="gradyInstall">
+                <h2>Grady Installation</h2>
+                <div id="git">
+                    <h3>Clone Repo</h3>
+                    <p>
+                        Clone the Grady repo from Github.  You can find the link <a target="blank" href="https://github.com/ct-gradual-typing/Grady">here</a>.
+                    </p>
+                </div>
+                <div id="stackInstall">
+                    <h3>Stack Installation</h3>
+                    <p>
+                        The installation of Grady has been tested on Windows 10 Enterprise Edition, Mac OS 10.11.6 El Capitan, Ubuntu 16.04.2 LTS.  In each situation the stack commands are the same.  You can download stack <a target="blank" href="https://docs.haskellstack.org/en/stable/README/">here</a>.
+                    </p>
+                    <h3>Building the Project</h3>
+                    <p>
+                        Navigate to the directory containing the Grady project. You must be inside the Grady folder where you can see the stack.yaml file.
+                    </p>
+                    <img class="image" src="Images/gitClone.png" alt="Git Clone" width="550" height="350">
+                    <p>
+                        Now type the command "stack setup". This should set up the stack environment based on the stack.yaml file.  It will need to download several things so be patient.
+                    </p>
+                    <p>
+                        Next type the command "stack build".
+                    </p>
+                    <img class="image" src="Images/stackBuild.png" alt="Stack Build" width="550" height="350">
+                    <p>
+                        After the build is completed you will be shown the path where the executable is held. In the picture below, this is circled in yellow.
+                    </p>
+                    <img class="image" src="Images/buildCompleteHighlighted.jpg" alt="Stack Build End" width="550" height="150">
+                    <p>
+                        The last step is to run the newly made exectuable in the stack environment.  Use the command "stack exec &lt;executable name&gt;".  Here that is "stack exec Grady.exe" or just "stack exec Grady".
+                    </p>
+                    <img class="image" src="Images/stackExec.png" alt="Stack Exec" width="550" height="350">
+                </div>
+            </div>
+		</main>
+		<footer>
+			Copyright &copy; 2017, Dr. Harley Eades, Michael Townsend
+			<br>
+        </footer>
+		</div>
+</body>
+</html>
