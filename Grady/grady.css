@@ -98,6 +98,12 @@ h3{
 	margin: 0;
 }
 
+h4{
+    padding: 0 20px 10px;
+	font-weight: bold;
+	margin: 0;
+}
+
 p{
     margin: 0;
 	padding: 0 10px 5px;
@@ -193,14 +199,33 @@ nav a:hover{
     padding: 0 25px 10px;
 }
 
-.image{
-    padding: 0 25px 10px;
-}
-
 #gradyExamples p{
     display:none;
 }
 
 #gradyExamples img{
     display:none;
+}
+
+.codeSnippet{
+    background-color:#D7DADB;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5),
+            inset 5px 5px 8px rgba(0,0,0,0.5);
+}
+
+.container{
+    padding: 0 25px 10px;
+}
+
+.description{
+    padding: 0 20px 10px;
+}
+
+.commands{
+    padding: 0 20px 10px;
+}
+
+.commands p{
+    border-bottom: 1px solid #2C3E50;
 }

@@ -35,13 +35,16 @@
 		<nav>
 			<ul>
 				<li>
-					<a href="Index.html">Home</a>
+					<a href="/Grady">Home</a>
+				</li>
+                <li>
+					<a href="GettingStarted.html">Getting Started</a>
 				</li>
 				<li>
 					<a href="HowToUse.html">How To Use Grady</a>
 				</li>
 				<li>
-					<a href="GettingStarted.html">Getting Started</a>
+					<a href="Examples.html">Examples</a>
 				</li>
 			</ul>
 		</nav>
@@ -61,109 +64,118 @@
                 </p>
             </div>
             <div id="repls">
-                <h2>How to use the Repls</h2>
-                <p>
-                    By default, Grady boots up into the "Main" Repl.  You cannot do much here except pick which of the two primary Repls you would like to work in, Surface or Core.
-                </p>
-                <p>
-                    The Core Repl provides the lower level or core, view of Grady.  It is quite powerful but forces stricter typing constraints on the programmer.  The Core and Surface repls are similar in functionality except that the Core Repl has an added feature.  You may make free variables and store them in the context for the purpose of evaluating Church Encodings!  See below for the syntax on how to do this.
-                </p>
-                <p>
-                    The Surface Repl uses type inference often to allow the programmer to omit type annotations in many scenarios. This makes the life of a programmer easier but obscures the detail of what is occuring at the lower level.
-                </p>
-                <div class="navRepl">
-                    <h3>Navigating Repls</h3>
-                    <p>
-                        In the Main Repl, use the command <strong>:cg</strong> to enter the Core Repl and <strong>:sg</strong> to enter the Surface Repl.  You can use the command <strong>:quit (:q)</strong> in either Repl to return to the Main Repl.   
+                <h2>Repls</h2>
+                <div class="container">
+                    <h3>Main Repl</h3>
+                    <p class="description">
+                        By default, Grady boots up into the Main Repl.  You cannot do much here except pick which of the two primary Repls you would like to work in, Surface or Core.
                     </p>
-                </div>
-            </div>
-            <div id="gFiles">
-                <h2>Grady Files</h2>
-                <h3>Grady Files Format</h3>
-                <p>
-                    Grady files follow a strict format, very similar to Haskell.  Declaring a function is a two line process.  On the first line you must declare the function's name, followed by a semicolon, followed by the function's type.  The second line must also start with the function's name, followed by an equals sign and then the function's definition and a semicolon. For example:<br>
-                    <strong>true : ? -> ? -> ?<br>
-                            true = \(p:?)->\(q:?)->p;</strong>
-                </p>
-                <h3>Importing Grady Files</h3>
-                <p>
-                    Importing a Grady file into another Grady file is easy.  On the first line of your file you must use the <strong>import</strong> keyword followed by the name of the file you would like to import, followed by a semicolon.
-                </p>
-                <div id="gradyExamples">
-                    <h3>Grady File Examples</h3>
-                    <p>
-                        A current list of interesting examples can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/tree/master/Examples">here</a>.  You will notice that each file needs the .gry extension.
-                    </p>
-                    <p>
-                        If you would like to load the examples that come with the project, follow these steps.  First, load up one of the Repls, let's pick the Core Repl.  So type the command <strong>:cg</strong>.  Then use the load file command, <strong>:l</strong> with the file path.
-                    </p>
-                    <img class="image" src="Images/fileLoad.png" alt="File Load" width="950" height="125">
-                    <p>
-                        You can then use the dump command, <strong>:d</strong> to verify that the contents of the file were loaded into the context.
-                    </p>
-                    <p>
-                        As a note of caution, if you loaded a second file into the Repl, the information from the first is lost.  See in the example below.
-                    </p>
-                    <img class="image" src="Images/fileLoadingOverwrite.png" alt="File Load" width="950" height="175">
-                </div>
-            </div>
-			<div id="replCmds" style="border-top: 1px solid #2C3E50">
-                <div class="section">
-                    <h2>Repl Commands</h2>
-                    <div class="command" >
-                        <h3>:help (:h)</h3>
-                            <p>
-                               At any time in the Repl use this command to enter into the help menu.  From here you 
-                               will see a list of all commands available.
-                            </p>
-                    </div>
-                    <div class="command">
-                        <h3>:type (:t) &lt;term&gt;</h3>
+                    <h4>Commands</h4>
+                    <div class="commands">
                         <p>
-                           This command allows you to typecheck a term.  If the term typechecks, the term's type is 
-                           returned.  If the term does not typecheck, then the appropriate error message is returned.
+                            <strong>:help (:h)</strong><br>
+                            The help command will display the help window, which displays the following three commands.
+                        </p>
+                        <p>
+                            <strong>:quit (:q)</strong><br>
+                            The quit command will exit out of the program.
+                        </p>
+                        <p>
+                            <strong>:surface-grady (:sg)</strong><br>
+                            Using this command will enter the user into the Surface Repl.
+                        </p>
+                        <p>
+                            <strong>:core-grady (:cg)</strong><br>
+                            Using this command will enter the user into the Surface Repl.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>:show (:s) &lt;term&gt;</h3>
+                    <h3>Core Repl</h3>
+                    <p class="description">
+                        The Core Repl provides the lower level or core, view of Grady.  It is quite powerful but forces stricter typing constraints on the programmer.  The Core and Surface Repls are similar in functionality except that the Core Repl has an added feature.  You may make free variables and store them in the context for the purpose of evaluating Church Encodings!  The context is stateful memory containing the definitions that the user defines in the Repl or loads from a file.  See below for the syntax on how to do this.
+                    </p>
+                    <h4>Commands</h4>
+                    <div class="commands">
                         <p>
+                           <strong>:help (:h)</strong><br>
+                           At any time in the Repl use this command to enter into the help menu.  From here you 
+                           will see a list of all commands available.
+                        </p>    
+                        <p>
+                            <strong>:type (:t) &lt;term&gt;</strong><br>
+                            This command allows you to typecheck a term.  If the term typechecks, the term's type is 
+                            returned.  If the term does not typecheck, then the appropriate error message is returned.
+                        </p>
+                        <p>
+                           <strong>:show (:s) &lt;term&gt;</strong><br>
                            The show command will display the abstract syntax type of the provided term.
                         </p>
-                    </div>
-                    <div class="command">
-                        <h3>:unfold (:u) &lt;term&gt;</h3>
                         <p>
+                           <strong>:unfold (:u) &lt;term&gt;</strong><br>
                            Unfold displays your term and where appropriate substitutes terms from 
                            the context into your term.  In this way a function that is composed of several
                            other functions can be seen in it entirety.  
                         </p>
-                    </div>
-                    <div class="command">
-                        <h3>:dump (:d)</h3>
                         <p>
+                           <strong>:dump (:d)</strong><br>
                            The dump command will display the terms in the context.  These will be displayed in the form
                            <strong>let &lt;variable&gt; = &lt;term&gt;</strong>
                         </p>
-                    </div>
-                    <div class="command">
-                        <h3>:load (:l) &lt;filename&gt;</h3>
                         <p>
+                           <strong>:load (:l) &lt;filename&gt;</strong><br>
                            You may load an external file of definitions using this command.  These files are
                            requred to have the extention .gry.  The terms are all typedchecked and then added to the context 
                            where they are usable in the Repl.  The loading  is done lazily, so if you have several 
                            definitions in your external file and the third one does not typecheck, the first two 
-                           will still be loaded into the context.
-                        </p>
-                        <p>
+                           will still be loaded into the context.<br><br>
+                        
                             A word of caution.  When loading a file into a Repl, realize that any values in the context will be overwritten by the values being loaded from the file.  For instance, if you load one file into the Repl and then a second file.  Only the items from the second file will be found in the context, as the items from the first file have been overwritten.
                         </p>
+                        <p>
+                            <strong>:quit (:q)</strong><br>
+                            At any time in the Repl use this command to exit the Repl.  If you are in either the Core or Surface Repl, you will be returned to the Main Repl.  If you were in the Main Repl already, you will exit the program.
+                        </p>
                     </div>
-                    <div class="command" >
-                        <h3>:quit (:q)</h3>
-                            <p>
-                               At any time in the Repl use this command to exit the Repl.  If you are in either the Core or Surface Repl, you will be returned to the Main Repl.  If you were in the Main Repl already, you will exit the program.
-                            </p>
+                    <h3>Surface Repl</h3>
+                    <p class="description">
+                        The Surface Repl allows the programmer to omit type annotations in many scenarios. This makes the life of a programmer easier but obscures the detail of what is occuring at the lower level.
+                    </p>
+                    <h4>Commands</h4>
+                    <div class="commands">
+                        <p>
+                            The commands for both the Core and Surface Repl are exactly the same.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="gFiles">
+                <h2>Grady Files</h2>
+                <div class="container">
+                    <h3>Grady Files Format</h3>
+                    <p>
+                        Grady files follow a strict format, very similar to Haskell.  Declaring a function is a two line process.  On the first line you must declare the function's name, followed by a semicolon, followed by the function's type.  The second line must also start with the function's name, followed by an equals sign and then the function's definition and a semicolon. For example:<br>
+                        <strong>true : ? -> ? -> ?<br>
+                                true = \(p:?)->\(q:?)->p;</strong>
+                    </p>
+                    <h3>Importing Grady Files</h3>
+                    <p>
+                        Importing a Grady file into another Grady file is easy.  On the first line of your file you must use the <strong>import</strong> keyword followed by the name of the file you would like to import, followed by a semicolon.
+                    </p>
+                    <div id="gradyExamples">
+                        <h3>Grady File Examples</h3>
+                        <p>
+                            A current list of interesting examples can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/tree/master/Examples">here</a>.  You will notice that each file needs the .gry extension.
+                        </p>
+                        <p>
+                            If you would like to load the examples that come with the project, follow these steps.  First, load up one of the Repls, let's pick the Core Repl.  So type the command <strong>:cg</strong>.  Then use the load file command, <strong>:l</strong> with the file path.
+                        </p>
+                        <img class="image" src="Images/fileLoad.png" alt="File Load" width="950" height="125">
+                        <p>
+                            You can then use the dump command, <strong>:d</strong> to verify that the contents of the file were loaded into the context.
+                        </p>
+                        <p>
+                            As a note of caution, if you loaded a second file into the Repl, the information from the first is lost.  See in the example below.
+                        </p>
+                        <img class="image" src="Images/fileLoadingOverwrite.png" alt="File Load" width="950" height="175">
                     </div>
                 </div>
             </div>

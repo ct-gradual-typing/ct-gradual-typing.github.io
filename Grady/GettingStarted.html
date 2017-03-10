@@ -23,13 +23,16 @@
 		<nav>
 			<ul>
 				<li>
-					<a href="Index.html">Home</a>
+					<a href="/Grady">Home</a>
+				</li>
+                <li>
+					<a href="GettingStarted.html">Getting Started</a>
 				</li>
 				<li>
 					<a href="HowToUse.html">How To Use Grady</a>
 				</li>
 				<li>
-					<a href="GettingStarted.html">Getting Started</a>
+					<a href="Examples.html">Examples</a>
 				</li>
 			</ul>
 		</nav>
@@ -39,8 +42,13 @@
                 <div id="git">
                     <h3>Clone Repo</h3>
                     <p>
-                        Clone the Grady repo from Github.  You can find the link <a target="blank" href="https://github.com/ct-gradual-typing/Grady">here</a>.
+                        Clone the Grady repo from Github.  You can find the repository <a target="blank" href="https://github.com/ct-gradual-typing/Grady">here</a>.
                     </p>
+                    <p class="codeSnippet">
+                   <code>
+                       C:\Users\YourName&gt;git clone https://github.com/ct-gradual-typing/Grady.git<br>
+                       Cloning into 'Grady'...
+                   </code>
                 </div>
                 <div id="stackInstall">
                     <h3>Stack Installation</h3>
@@ -51,22 +59,32 @@
                     <p>
                         Navigate to the directory containing the Grady project. You must be inside the Grady folder where you can see the stack.yaml file.
                     </p>
-                    <img class="image" src="Images/gitClone.png" alt="Git Clone" width="550" height="350">
+                    
                     <p>
-                        Now type the command "stack setup". This should set up the stack environment based on the stack.yaml file.  It will need to download several things so be patient.
+                        Now type the command "stack setup". This will set up the stack environment based on the stack.yaml file.  It will need to download several things so be patient.
                     </p>
+                    <p class="codeSnippet">
+                   <code>
+                        C:\Users\YourName\Grady&gt;stack setup
+                   </code>
+                   </p>
                     <p>
-                        Next type the command "stack build".
+                        Next type the command "stack build".  This will compile and make an executable of the project that can be run in a stack environment.
                     </p>
-                    <img class="image" src="Images/stackBuild.png" alt="Stack Build" width="550" height="350">
+                    <p class="codeSnippet">
+                   <code>
+                        C:\Users\YourName\Grady&gt;stack build
+                   </code>
+                   </p>
+                    
                     <p>
-                        After the build is completed you will be shown the path where the executable is held. In the picture below, this is circled in yellow.
+                        The last step is to run the newly made exectuable in the stack environment.  Use the command "stack exec" with the project's name.  This will start up the project!
                     </p>
-                    <img class="image" src="Images/buildCompleteHighlighted.jpg" alt="Stack Build End" width="550" height="150">
-                    <p>
-                        The last step is to run the newly made exectuable in the stack environment.  Use the command "stack exec &lt;executable name&gt;".  Here that is "stack exec Grady.exe" or just "stack exec Grady".
-                    </p>
-                    <img class="image" src="Images/stackExec.png" alt="Stack Exec" width="550" height="350">
+                    <p class="codeSnippet">
+                   <code>
+                        C:\Users\YourName\Grady&gt;stack exec Grady
+                   </code>
+                   </p>
                 </div>
             </div>
 		</main>
