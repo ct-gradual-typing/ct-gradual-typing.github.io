@@ -158,13 +158,6 @@ nav a:hover{
 	overflow: auto;
 }
 
-.command p{
-    display: none;
-}
-
-.example{
-    border-top: 1px solid #2C3E50;
-}
 
 #examplesIntro{
     padding: 20px 10px 20px 10px;
@@ -175,12 +168,8 @@ nav a:hover{
     padding: 0px 0px 0px 10px;
 }
 
-.examples p{
-    display: none;
-}
-
-.section div{
-    display:none;
+.section p{
+    padding: 0 25px 10px;
 }
 
 .navRepl p{
@@ -199,16 +188,9 @@ nav a:hover{
     padding: 0 25px 10px;
 }
 
-#gradyExamples p{
-    display:none;
-}
-
-#gradyExamples img{
-    display:none;
-}
-
 .codeSnippet{
     background-color:#D7DADB;
+    margin: 5px 5px 5px 30px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5),
             inset 5px 5px 8px rgba(0,0,0,0.5);
@@ -216,6 +198,7 @@ nav a:hover{
 
 .container{
     padding: 0 25px 10px;
+    display:none;
 }
 
 .description{
@@ -228,4 +211,8 @@ nav a:hover{
 
 .commands p{
     border-bottom: 1px solid #2C3E50;
+}
+
+.hover{
+    background-color: #D7DADB;
 }

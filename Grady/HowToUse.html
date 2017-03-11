@@ -9,19 +9,17 @@
             $(document).ready(function(){
                 
                 $(".command").click(function(){
-                    $(this).find("p").toggle();
+                    $(this).find(".container").toggle();
+                    $(this).removeClass('hover');
                 });
                 
-                $(".section h2").click(function(){
-                    $(this).parent().find(".command").toggle();
+                $(".command").mouseover(function(){
+                    $(this).addClass('hover');
                 });
                 
-                $("#gradyExamples").click(function(){
-                    $(this).find("p").toggle();
-                    $(this).find("img").toggle();
+                $(".command").mouseout(function(){
+                    $(this).removeClass('hover');
                 });
-                
-                
                 
             });
             
@@ -52,18 +50,13 @@
             <div id="Intro">
             <h2>Introduction to Grady</h2>
                 <p>
-                   Grady includes a Surface and Core Repl allowing users to experience the language from both a high and 
-                   low level.  The Repls provides typechecking and evaluation
-                   of terms with helpful error messages, helping new users become accustomed to the language syntax.  We 
-                   recommend that new users start with the Surface Repl as its syntax is simpler.  In general, the syntax of Grady is similar to Haskell.  
-                   Additionally, Grady is a highly expressive language allowing everything from programming in 
-                   untyped lambda-calculus to polymorphism.  
+                   Grady includes a Surface and Core Repl allowing users to experience the language from both a high and low level.  The Repls provides typechecking and evaluation of terms with helpful error messages, helping new users become accustomed to the language syntax.  We recommend that new users start with the Surface Repl as its syntax is simpler.  In general, the syntax of Grady is similar to Haskell. Additionally, Grady is a highly expressive language allowing everything from programming in untyped lambda-calculus to polymorphism.  
                 </p>
                 <p>
-                    Click on any of the Grady elements below to see their description and examples.  All of the elements below are found in both Repls excet <strong>split</strong> and <strong>squash</strong>, which are only found in the Core Repl.
+                    Click on any of the Grady elements below to see their description and examples.  All types are denoted with a capital letter of the alphabet and all expressions are denoted with t<sub>i</sub> where i is a natural number.
                 </p>
             </div>
-            <div id="repls">
+            <div id="repls" class="command">
                 <h2>Repls</h2>
                 <div class="container">
                     <h3>Main Repl</h3>
@@ -118,17 +111,7 @@
                         <p>
                            <strong>:dump (:d)</strong><br>
                            The dump command will display the terms in the context.  These will be displayed in the form
-                           <strong>let &lt;variable&gt; = &lt;term&gt;</strong>
-                        </p>
-                        <p>
-                           <strong>:load (:l) &lt;filename&gt;</strong><br>
-                           You may load an external file of definitions using this command.  These files are
-                           requred to have the extention .gry.  The terms are all typedchecked and then added to the context 
-                           where they are usable in the Repl.  The loading  is done lazily, so if you have several 
-                           definitions in your external file and the third one does not typecheck, the first two 
-                           will still be loaded into the context.<br><br>
-                        
-                            A word of caution.  When loading a file into a Repl, realize that any values in the context will be overwritten by the values being loaded from the file.  For instance, if you load one file into the Repl and then a second file.  Only the items from the second file will be found in the context, as the items from the first file have been overwritten.
+                           <strong>let &lt;variable&gt; = &lt;term&gt;</strong>.
                         </p>
                         <p>
                             <strong>:quit (:q)</strong><br>
@@ -147,364 +130,466 @@
                     </div>
                 </div>
             </div>
-            <div id="gFiles">
-                <h2>Grady Files</h2>
+            <div id="gFiles" class="command">
+                <h2>Loading Files</h2>
                 <div class="container">
-                    <h3>Grady Files Format</h3>
+                    <h3>Grady Files</h3>
                     <p>
                         Grady files follow a strict format, very similar to Haskell.  Declaring a function is a two line process.  On the first line you must declare the function's name, followed by a semicolon, followed by the function's type.  The second line must also start with the function's name, followed by an equals sign and then the function's definition and a semicolon. For example:<br>
-                        <strong>true : ? -> ? -> ?<br>
-                                true = \(p:?)->\(q:?)->p;</strong>
+                        <p class="codeSnippet">
+                            <code>
+                                true : ? -> ? -> ?<br>
+                                true = \(p:?)->\(q:?)->p;
+                            </code>
+                        </p>
                     </p>
                     <h3>Importing Grady Files</h3>
                     <p>
-                        Importing a Grady file into another Grady file is easy.  On the first line of your file you must use the <strong>import</strong> keyword followed by the name of the file you would like to import, followed by a semicolon.
+                        Importing a Grady file into another Grady file is easy and is very similar to Haskell syntax.  On the first line of your file you must use the keyword <strong>import</strong> followed by the name of the file you would like to import, followed by a semicolon.
                     </p>
-                    <div id="gradyExamples">
-                        <h3>Grady File Examples</h3>
-                        <p>
-                            A current list of interesting examples can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/tree/master/Examples">here</a>.  You will notice that each file needs the .gry extension.
-                        </p>
-                        <p>
-                            If you would like to load the examples that come with the project, follow these steps.  First, load up one of the Repls, let's pick the Core Repl.  So type the command <strong>:cg</strong>.  Then use the load file command, <strong>:l</strong> with the file path.
-                        </p>
-                        <img class="image" src="Images/fileLoad.png" alt="File Load" width="950" height="125">
-                        <p>
-                            You can then use the dump command, <strong>:d</strong> to verify that the contents of the file were loaded into the context.
-                        </p>
-                        <p>
-                            As a note of caution, if you loaded a second file into the Repl, the information from the first is lost.  See in the example below.
-                        </p>
-                        <img class="image" src="Images/fileLoadingOverwrite.png" alt="File Load" width="950" height="175">
-                    </div>
+                    <p class="codeSnippet">
+                        <code>
+                            import Naturals;<br><br>
+                            
+                            
+                            true : ? -> ? -> ?<br>
+                            true = \(p:?)->\(q:?)->p;
+                            
+                        </code>
+                    </p>
+                    <p>
+                        As you can see we have started a Grady file with importing another Grady filed named <strong>Naturals</strong>.  From here we have defined out Church-Encoded definition of true.  We are also able to use definitions from the <strong>Naturals</strong> file now.
+                    </p>
+                    <h3>Loading Grady Files</h3>
+                    <p>
+                        Loading a Grady file into the Repl is done using the keyword <strong>:load (:l)</strong>, which is very similar to Haskell syntax.  You may load an external file of definitions using this command.  These files are requred to have the extention .gry.  The terms are all typedchecked and then added to the context where they are usable in the Repl.  The loading is done lazily, so if you have several definitions in your external file and the third one does not typecheck, the first two will still be loaded into the context.<br><br>
+                        
+                        A word of caution.  When loading a file into a Repl, realize that any values in the context will be overwritten by the values being loaded from the file.  For instance, if you load one file into the Repl and then a second file.  Only the items from the second file will be found in the context, as the items from the first file have been overwritten. For example lets assume we are in the Core Repl, let's import a file:
+                    </p>
+                    <p class="codeSnippet">
+                        <code>
+                            Core> :load ../Examples/Core/ChurchEncodings.gry
+                        </code>
+                    </p>
+                    <p>
+                        Now let's verify that we loaded the file and that it's contents were added to the context.
+                    </p>
+                    <p class="codeSnippet">
+                        <code>
+                            Core> :dump<br>
+["let squashar = \\(x:? -> ?).squash<? -> ?> x","let splitar = \\(x:?).split<? -> ?> x","let squashpd = \\(x:(?,?)).squash<(?,?)> x","let splitpd = \\(x:?).split<(?,?)> x",...]
+                        </code>
+                    </p>
+                    <p>
+                        We can now see the contents from the file printed out.  You can access this same file, called Church-Encodings, from the Grady project <a targe="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/ChurchEncodings.gry">here</a>.  This file depends on another example file, Skeleton.gry, which can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/Skeleton.gry">here</a>.  The Skeleton file does not need to be added to the Repl but just in the same folder as the Church-Encodings file.  What happens is that since the Church-Encodings file depends on the Skeleton file, both are imported into the Repl.
+                    </p>
+                    <p>
+                        So let's see if we now add another file into the Repl and check then check the contents of the context.
+                    </p>
+                    <p class="codeSnippet">
+                        <code>
+                            Core> :load ../Examples/Core/Pair.gry<br>
+                            Core> :dump<br>
+                            ["let true = \\(p:?).\\(q:?).p","let false = \\(p:?).\\(q:?).q","let pair = \\(x:?).\\(y:?).\\(z:? -> ? -> ?).(z x) y","let first = \\(p:(? -> ? -> ?) -> ?).p (\\(p:?).\\(q:?).p)","let second = \\(p:(? -> ? -> ?) -> ?).p (\\(p:?).\\(q:?).q)",...]
+                        </code>
+                    </p>
+                    <p>
+                        As you can see the previous contents have been overwritten and replaced with the definitions of the Pair file, which is also included in the project and can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/Pair.gry">here</a>.
+                    </p>
                 </div>
             </div>
-            <div id="numbersSection">
-                 <div class="section">
-                    <h2>Numbers</h2>
-                    <div class="command">
-                        <h3>Natural Number Type</h3>
+            
+            <div id="functionSection" class="command">
+                <h2>Functions</h2>
+                    <div class="container">
+                        <h3>&lambda;-adstraction</h3>
+                        <div class="section">
+                            <p>
+                                Type: A -> B
+                            </p>
+                            <p>
+                                Syntax: \(x: A) -> t</p>
+                            </p>
+                        </div>
+                        <h3>Function Application</h3>
+                        <div class="section">
+                            <p>
+                                Type: A
+                            </p>
+                            <p>
+                                Syntax: t<sub>1</sub> t<sub>2</sub></p>
+                            </p>
+                            <p>
+                                Where t<sub>1</sub> is a function that takes as an argument t<sub>2</sub> and returns an element of type A.
+                            </p>
+                            <p class="example">
+                                Example:<br>
+                                 <strong>:t \(m:Nat) -> \(f:Nat -> Nat) -> f m</strong><br>
+                                Gives the result: <strong>Nat -> (Nat -> Nat) -> Nat</strong>
+                            </p>
+                        </div>
+                        <h3>Type Application</h3>
+                        <div class="section">
+                            <p>
+                                Type: ???
+                            </p>
+                            <p>
+                                Syntax: [A]t
+                            </p>
+                            <p>
+                               This will apply type A to all type variables in t.
+                            </p>
+                            <p class="example">
+                                Example:<br>
+                                <p class="codeSnippet">
+                                    <code>
+                                        <strong>\(m:Nat) -> ([Nat -> Nat]fix)<br>
+                                            &emsp;&emsp;(\(r:Nat -> Nat) -><br>
+                                            &emsp;&emsp;\(n:Nat) -> case n of 0 -> m, (succ n') -> succ (r n'))</strong>
+                                    </code>
+                                </p>
+                                 
+                                This is the definition for addition with natural numbers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <div id="castingSection" class="command">
+                <h2>Casting</h2>
+                <div class="container">
+                    <h3>Unknown Type</h3>
+                    <div class="section">
                         <p>
-                           <strong>Nat</strong> <br>
-                           Any natural number.  
+                            Type: ?
+                        </p>
+                        <p>
+                            This is the type of all untyped programs.  All Simple types can be casted to the Unknown type.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Successor</h3>
+                    <h3>Boxing</h3>
+                    <div class="section">
                         <p>
-                            <strong>succ term</strong><br>
-                            This returns the successor value of the given term.
+                            Type: A -> ?
                         </p>
-                        <p class="example">
-                            Example:<br>
-                            <strong> succ 8</strong><br>
-                            Gives the result: <strong>9</strong>
+                        <p>
+                            Syntax: box&lt;A&gt; t
                         </p>
-                        <p class="example">
-                            Example: <br>
-                            <strong>:t \(m:Nat) -> succ m</strong><br>
-                            Gives the result: <strong>Nat -> Nat</strong>
+                        <p>
+                            Boxing t will cast it from type A into the Unknown type.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Zero</h3>
+                    <h3>Unboxing</h3>
+                    <div class="section">
+                        <p>
+                            Type: ? -> A
+                        </p>
+                        <p>
+                            Syntax: unbox&lt;A&gt; t
+                        </p>
+                        <p>
+                            Unboxing t will cast it from type ? to A.
+                        </p>
+                    </div>
+                    <h3>Splitting</h3>
+                    <div class="section">
+                        <p>
+                            Type: ? -> (? -> ?)
+                        </p>
+                        <p>
+                            Syntax: split&lt;? -> ?&gt; t
+                        </p>
+                        <p>
+                            Splitting takes in a t of type ? and splits it into a function of type ? -> ?. <br>
+                            <strong>Note: </strong>This is only used in the Core Repl.
+                        </p>
+                    </div>
+                    <h3>Squashing</h3>
+                    <div class="section">
+                        <p>
+                            Type: (? -> ?) -> ?
+                        </p>
+                        <p>
+                            Syntax: squash&lt;A&gt; t
+                        </p>
+                        <p>
+                            A is of type t.  Squash takes in a function and compresses it down to an element of type ?.  <br>
+                            <strong>Note: </strong>This is only used in the Core Repl.
+                        </p>
+                    </div>
+                </div>
+            </div>                    
+            <div id="numbersSection" class="command">
+                <h2>Numbers</h2>
+                 <div class="container">
+                    <h3>Natural Number Type</h3>
+                    <div class="section">
+                        <p>
+                            Type: Nat
+                        </p>
+                        <p>
+                          This may be any natural number.  
+                        </p>
+                    </div>
+                    <h3>Successor</h3>
+                    <div class="section">
+                        <p>
+                            Type: Nat -> Nat
+                        </p>
+                        <p>
+                            Syntax: succ t
+                        </p>
+                        <p>
+                            This returns the successor value of the given term t.
+                        </p>
+                    </div>
+                    <h3>Zero</h3>
+                    <div class="section">
+                        <p>
+                            Type: Nat
+                        </p>
                         <p>
                             The base of natural numbers.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Natural Number Eliminator</h3>
+                    <h3>Natural Number Eliminator</h3>
+                    <div class="section">
                         <p>
-                            <strong>case &lt;expression&gt; of 0 -> &lt;expression&gt;, (succ&lt;variable name&gt;) -> &lt;expression&gt;</strong><br>
+                            Type: Nat -> A
+                        </p>
+                        <p>
+                            Syntax: case t of 0 -> A, (succ A) -> A</strong>
+                        </p>
+                        <p>
                             This allows the user to case split over natural numbers.
                         </p>
                     </div>
                 </div>
             </div>
-            <div id="pairSection">
-                <div class="section">
-                    <h2>Pairs</h2>
-                    <div class="command">
-                        <h3>Pair</h3>
+            <div id="pairSection" class="command">
+                <h2>Pairs</h2>
+                <div class="container">
+                    <h3>Pair</h3>
+                    <div class="section">
                         <p>
-                        <strong>(&lt;term&gt;,&lt;term&gt;)</strong> <br>
-                           The pair type takes two terms and maintains them
+                            Type: (A,A)
+                        </p>
+                        <p>
+                            Syntax: (t<sub>1</sub>,t<sub>2</sub>)
+                        </p>
+                        <p>
+                            The pair type takes two terms and maintains them
                            as a tuple.  The terms may be of different types.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Product Type</h3>
+                    <h3>Product Type</h3>
+                    <div class="section">
                         <p>
-                           <strong>(&lt;type&gt;,&lt;type&gt;)</strong> <br>
+                            Type: (A,A)
+                        </p>
+                        <p>
+                            Syntax: (A,A)
+                        </p>
+                        <p>
                            The product type takes two types and maintains them
                            as a tuple.  The types may be of different.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>First Projection</h3>
+                    <h3>First Projection</h3>
+                    <div class="section">
                         <p>
-                            <strong>fst</strong><br>
-                            This returns the first projection of a pair.
+                            Type: A
                         </p>
-                        <p class="example">
-                            <strong>:t \(m:(Nat,?)) -> fst m</strong><br>
-                            Gives the result: <strong>(Nat,?) -> Nat</strong>
+                        <p>
+                            Syntax: fst (t<sub>1</sub>,t<sub>2</sub>)
+                        </p>
+                        <p>
+                            This returns the first projection of a pair.  In the above syntax, t<sub>1</sub> would be returned.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Second Projection</h3>
+                    <h3>Second Projection</h3>
+                    <div class="section">
                         <p>
-                            <strong>snd</strong><br>
-                            This returns the second projection of a pair.
+                            Type: A
                         </p>
-                        <p class="example">
-                            <strong>:t \(m:(Nat,?)) -> fst m</strong><br>
-                            Gives the result: <strong>(Nat,?) -> ?</strong>
+                        <p>
+                            Syntax: snd (t<sub>1</sub>,t<sub>2</sub>)
+                        </p>
+                        <p>
+                            This returns the second projection of a pair.  In the above syntax, t<sub>2</sub> would be returned.
                         </p>
                     </div>
                 </div>
             </div>
-            <div id="listSection">
-                <div class="section">
-                    <h2>Lists</h2>
-                    <div class="command">
-                        <h3>Empty List</h3>
+            <div id="listSection" class="command">
+                <h2>Lists</h2>
+                <div class="container">
+                    <h3>Empty List</h3>
+                    <div class="section">
                         <p>
-                            <strong>[]</strong><br>
+                            Type: List
+                        </p>
+                        <p>
+                            Syntax: []
+                        </p>
+                        <p>
                             An empty list is denoted as such.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>List Type</h3>
+                    <h3>List Type</h3>
+                    <div class="section">
                         <p>
-                           <strong>[&lt;term&gt;]</strong><br>
-                           In Grady you may use lists using this type, with
-                           items in the list separated by commas.  All items in the list must have the same type.
+                            Type: [A]
                         </p>
-                        <p class="example">
-                            Example:<br>
-                            <strong>:t [9,5]</strong><br>
-                            Gives the result: <strong>[Nat]</strong>
+                        <p>
+                            Syntax: [t<sub>1</sub>,t<sub>2</sub>,...]
+                        </p>
+                        <p>
+                           In Grady you may use lists with items in the list separated by commas.  All items in the list must have the same type.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Cons</h3>
+                    <h3>Cons</h3>
+                    <div class="section">
                         <p>
-                            <strong>term::[term]</strong><br>
-                            Cons concatenates a term of a specific type with a list of terms of the same type.
+                            Type: [A]
                         </p>
-                        <p class="example">
-                            Example:<br>
-                            <strong>8::[9,10]</strong><br>
-                            Gives the result: <strong>[8,9,10]</strong>
+                        <p>
+                            Syntax: t<sub>1</sub>::[A]
+                        </p>
+                        <p>
+                            Cons concatenates a term of a specific type with a list of terms of the same type.  So here t<sub>1</sub> must be of type A.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>List Eliminator</h3>
+                    <h3>List Eliminator</h3>
+                    <div class="section">
+                    <p>
+                        Type: [A] -> B</p>
+                    </p>
+                    <p>
+                        Syntax: case t<sub>1</sub> of [] -> t<sub>2</sub>, (a::[a]) -> t<sub>3</sub>
+                    </p>
+                    <p>
+                        This allows the user to case split over lists.
+                    </p>
+                    </div>
+                </div>
+            </div>
+            <div id="varSection" class="command">
+                <h2>Variables</h2>
+                <div class="container">
+                    <h3>Term Variable Binding</h3>
+                    <div class="section">
                         <p>
-                            <strong>case &lt;expression&gt; of [] -> &lt;expression&gt;, (&lt;variable name&gt;::&lt;variable name&gt;) -> &lt;expression&gt;</strong><br>
-                            This allows the user to case split over lists.
+                            Type: ????
+                        </p>
+                        <p>
+                            Syntax: let x = t<sub>1</sub>
+                        </p>
+                        <p>
+                           Using the <strong>let</strong> keyword binds a term to a variable.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command. All bindings must typecheck.
+                        </p>
+                    </div>
+                    <h3>Type Variable Binding</h3>
+                    <div class="section">
+                        <p>
+                            Type: ????
+                        </p>
+                        <p>
+                            Syntax: \(X &lt;: A)
+                        </p>
+                        <p>
+                            This indicates that X is a subtype of the given type, A.
+                        </p>
+                    </div>
+                    <h3>Free Variables</h3>
+                    <div class="section">
+                        <p>
+                            Type: A
+                        </p>
+                        <p>
+                            Syntax: :decvar (:dv) x : A
+                        </p>
+                        <p>
+                            To fully evaluate Church Encodings, one often needs a free variable like this.
                         </p>
                     </div>
                 </div>
             </div>
-            <div id="functionSection">
-                <div class="section">
-                    <h2>Functions</h2>
-                    <div class="command">
-                        <h3>Functions</h3>
+            <div id="polySection" class="command">
+                <h2>Bounded Polymorphism</h2>
+                <div class="container">
+                    <h3>Simple</h3>
+                    <div class="section">
                         <p>
-                            <strong>&lt;type&gt; -> &lt;type&gt;</strong> <br>
-                           This type allows Grady to represent functions using an arrow. The first <strong>type</strong> represents the input's type, while the last <strong>type</strong> represents the output's type.
+                            Type: ????
                         </p>
-                        <p class="example">
-                            Example:<br>
-                             <strong>Nat -> Nat</strong><br>
-                             This represents a function that takes in a <strong>Nat</strong> and returns a <strong>Nat</strong>
-                        </p>
-                        <p class="example">
-                            Example:<br>
-                             <strong>Nat -> Nat -> Nat</strong><br>
-                             This represents a function that takes in two terms of type <strong>Nat</strong> and returns a term of type <strong>Nat</strong>.
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Function Type</h3>
                         <p>
-                           <strong>\(&lt;variable name&gt;:type) -> t</strong><br>
-                            This represents a lambda abstration with a <strong>variable name</strong> its <strong>type</strong> and the body of the lambda expression,  <strong>t</strong>.
+                            Syntax: Simple
                         </p>
-                    </div>
-                    <div class="command">
-                        <h3>Type Functions</h3>
-                        <p>
-                            <strong>\(&lt;type variable name&gt;:type) -> t</strong><br>
-                            This represents a lambda abstration with a <strong>type variable name</strong> its <strong>type</strong> and the body of the lambda expression, <strong>t</strong>.
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Application</h3>
-                        <p>
-                            Grady applies a argument to a function with a space in between the function and the argument.
-                        </p>
-                        <p class="example">
-                            Example:<br>
-                             <strong>:t \(m:Nat) -> \(f:Nat -> Nat) -> f m</strong><br>
-                            Gives the result: <strong>Nat -> (Nat -> Nat) -> Nat</strong>
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Type Application</h3>
-                        <p>
-                            <strong>[type]&lt;expression&gt;</strong><br>
-                            This will apply the <strong>type</strong> to all <strong>type variables</strong> in the given <strong>expression</strong>.
-                        </p>
-                        <p class="example">
-                            Example:<br>
-                             <strong>\(m:Nat) -> ([Nat -> Nat]fix)<br>
-                                        &emsp;&emsp;(\(r:Nat -> Nat) -><br>
-                                        &emsp;&emsp;\(n:Nat) -> case n of 0 -> m, (succ n') -> succ (r n'))</strong><br>
-                            This is the definition for adding natural numbers.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id="castingSection">
-                <div class="section">
-                    <h2>Casting</h2>
-                    <div class="command">
-                        <h3>Split</h3>
-                        <p>
-                            <strong>split&lt;? -> ?&gt;</strong><br>
-                            This function takes an element of type <strong>?</strong> can splits it into a function that
-                            takes an element of type <strong>?</strong> and returns an element of type <strong>?</strong>.
-                        </p>
-                        <p class="example">
-                            Example:<br>
-                            <strong>:t \(m:? ) -> split&lt;? -> ?&gt; m</strong><br>
-                            Gives the result: <strong>? -> ? -> ?</strong>
-                        </p>
-                        <p class="example" style="display: none">
-                            <strong>Note: </strong>This is only used in the Core Repl.
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Squash</h3>
-                        <p>
-                            <strong>squash&lt;? -> ?&gt;</strong><br>
-                            Squash takes a function of type <strong>&lt;? -> ?&gt;</strong> and return an element of type <strong>?</strong>
-                        </p>
-                        <p class="example">
-                            Example: <br>
-                            <strong>:t \(m:? -> ?) -> squash&lt;? -> ?&gt; m</strong><br>
-                            Gives the result: <strong>(? -> ?) -> ?</strong>
-                        </p>
-                        <p class="example" style="display: none">
-                            <strong>Note: </strong>This is only used in the Core Repl.
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Box</h3>
-                        <p>
-                            <strong>box&lt;type&gt;</strong><br>
-                            Box is a function that takes the given type and inserts it into the untyped universe.
-                        </p>
-                        <p class="example">
-                        Example:<br>
-                        <strong>:t \(m:Nat)-> box&lt;Nat&gt; m</strong><br>
-                        Gives the result: <strong>Nat -> ?</strong>
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Unbox</h3>
-                        <p >
-                            <strong>unbox&lt;term&gt;</strong><br>
-                            Unbox is a function that extracts the given type from the untyped universe.<br>
-                            
-                        </p>
-                        <p class="example">
-                            Example:<br>
-                            <strong>:t \(m:?)-> unbox&lt;Nat&gt; m</strong><br>
-                            Gives the result: <strong>? -> Nat</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id="varSection">
-                <div class="section">
-                    <h2>Variables</h2>
-                    <div class="command">
-                        <h3>Term Variable Binding</h3>
-                        <p>
-                        <strong>let &lt;variable name&gt; = &lt;term&gt;</strong><br>
-                           Binding a type to a variable is done with a <strong>let</strong> statement.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command.                         
-                           All bindings must typecheck.
-                        </p>
-                    </div>
-                    <div class="command">
-                        <h3>Type Variable Binding</h3>
-                            <p>
-                                <strong>\(&lt;type variable name&gt; &lt;: type)</strong><br>
-                                This indicates that the <strong>&lt;type variable name&gt;</strong> is a subtype of the given <strong>type</strong>.
-                            </p>
-                    </div>
-                    <div class="command">
-                        <h3>Free Variables</h3>
-                            <p>
-                                <strong>:decvar (:dv) &lt;variable name&gt; : type</strong><br>
-                                To fully evaluate Church Encodings, one often needs a free variable.  This is how they are constructed.  
-                            </p>
-                            <p class="example">
-                            Example:<br>
-                            <strong>:dv g:Nat</strong><br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id="polySection">
-                <div class="section">
-                    <h2>Polymorphism</h2>
-                    <div class="command">
-                        <h3>Forall Type</h3>
-                        <p>
-                            <strong>forall (&lt;type variable name&gt;&lt;:type).type</strong><br>
-                            This allows for universal quantification.
-                        </p>
-                        <p class="example">
-                            Example:<br>
-                            <strong>id = \(X&lt;:?) -> \(x:X) -> x</strong><br>
-                            Gives the result: <strong>forall (X&lt;:?).(X -> X)</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id="atomicSection">
-                <div class="section">
-                    <h2>Other Atomic Types</h2>
-                    <div class="command">
-                        <h3>Simple</h3>
                         <p>
                            Universe of simple types
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Unit Type</h3>
+                    <h3>Forall Type</h3>
+                    <div class="section">
                         <p>
-                           <strong>Unit</strong><br>
+                            Type: ???
+                        </p>
+                        <p>
+                            Syntax: forall (X&lt;:A).B
+                        </p>
+                        <p>
+                            This allows for universal quantification.
+                        </p>
+                        <p class="example">
+                            Example:
+                            <p class="codeSnippet">
+                                <code>
+                                    \(X&lt;:?) -> \(x:X) -> x
+                                </code>
+                            </p>
+                            <p>
+                            This is the identity function. And gives the result:
+                            </p>
+                            <p class="codeSnippet">
+                                <code>
+                                forall (X&lt;:?).(X -> X)
+                                </code>
+                            </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="atomicSection" class="command">
+                <h2>Other Atomic Types</h2>
+                <div class="container">
+                    <h3>Unit Type</h3>
+                    <div class="section">
+                        <p>
+                            Syntax: U
+                        </p>
+                        <p>
                            The terminal object.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Untyped</h3>
+                    <h3>Untyped Type</h3>
+                    <div class="section">
                         <p>
-                           <strong>?</strong> <br>
-                           This type represents an element in the untyped universe.<br>
+                            Syntax: ?
+                        </p>
+                        <p>
+                           This type represents an element in the untyped universe.
                         </p>
                     </div>
-                    <div class="command">
-                        <h3>Triv</h3>
+                    <h3>Triv Type</h3>
+                    <div class="section">
                         <p>
-                            <strong>Triv</strong> is the trivial program with type <strong>Unit</strong>.
+                            Type: Unit
+                        </p>
+                        <p>
+                            Syntax: Triv
+                        </p>
+                        <p>
+                            Triv is the trivial program with type <strong>Unit</strong>.
                         </p>
                     </div>
                 </div>
