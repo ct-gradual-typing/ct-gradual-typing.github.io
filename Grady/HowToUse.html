@@ -82,6 +82,28 @@
                             Using this command will enter the user into the Surface Repl.
                         </p>
                     </div>
+                    <h4>Navigating Between Repls</h4>
+                    <p class="example codeSnippet">
+                        <code>
+                            Welcome to Grady!<br>
+                            Grady> :cg<br>
+                            Core> :q<br>
+                            Leaving Core Grady.<br>
+                            Grady> <br>
+                        </code>
+                        <p>
+                            In the above example, we navigated from the Main Repl to the Core Repl and back.  Now consider moving from the Main Repl into the Surface Repl and back, followed by exiting the Main Repl.
+                        </p>
+                    </p>
+                    <p class="example codeSnippet">
+                        <code>
+                            Grady> :sg<br>
+                            Surface> :q<br>
+                            Leaving Surface Grady.<br>
+                            Grady> :q<br>
+                            Goodbye!
+                        </code>
+                    </p>
                     <h3>Core Repl</h3>
                     <p class="description">
                         The Core Repl provides the lower level or core, view of Grady.  It is quite powerful but forces stricter typing constraints on the programmer.  The Core and Surface Repls are similar in functionality except that the Core Repl has an added feature.  You may make free variables and store them in the context for the purpose of evaluating Church Encodings!  The context is stateful memory containing the definitions that the user defines in the Repl or loads from a file.  See below for the syntax on how to do this.
@@ -226,30 +248,6 @@
                                 Example:<br>
                                  <strong>:t \(m:Nat) -> \(f:Nat -> Nat) -> f m</strong><br>
                                 Gives the result: <strong>Nat -> (Nat -> Nat) -> Nat</strong>
-                            </p>
-                        </div>
-                        <h3>Type Application</h3>
-                        <div class="section">
-                            <p>
-                                Type: ???
-                            </p>
-                            <p>
-                                Syntax: [A]t
-                            </p>
-                            <p>
-                               This will apply type A to all type variables in t.
-                            </p>
-                            <p class="example">
-                                Example:<br>
-                                <p class="codeSnippet">
-                                    <code>
-                                        <strong>\(m:Nat) -> ([Nat -> Nat]fix)<br>
-                                            &emsp;&emsp;(\(r:Nat -> Nat) -><br>
-                                            &emsp;&emsp;\(n:Nat) -> case n of 0 -> m, (succ n') -> succ (r n'))</strong>
-                                    </code>
-                                </p>
-                                 
-                                This is the definition for addition with natural numbers.
                             </p>
                         </div>
                     </div>
@@ -533,6 +531,39 @@
                                 forall (X&lt;:?).(X -> X)
                                 </code>
                             </p>
+                        </p>
+                    </div>
+                    <h3>Type Application</h3>
+                    <div class="section">
+                        <p>
+                            Type: ???
+                        </p>
+                        <p>
+                            Syntax: [A]t
+                        </p>
+                        <p>
+                           This will apply type A to all type variables in t.
+                        </p>
+                        <p class="example">
+                            Example:<br>
+                            <p class="codeSnippet">
+                                <code>
+                                    <strong>\(m:Nat) -> ([Nat -> Nat]fix)<br>
+                                        &emsp;&emsp;(\(r:Nat -> Nat) -><br>
+                                        &emsp;&emsp;\(n:Nat) -> case n of 0 -> m, (succ n') -> succ (r n'))</strong>
+                                </code>
+                            </p>
+                             
+                            This is the definition for addition with natural numbers.
+                        </p>
+                    </div>
+                    <h3>Top</h3>
+                    <div class="section">
+                        <p>
+                            Type: TODO
+                        </p>
+                        <p>
+                            Syntax: TODO
                         </p>
                     </div>
                 </div>
