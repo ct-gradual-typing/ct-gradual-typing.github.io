@@ -135,7 +135,7 @@
                 <div class="container">
                     <h3>Grady Files</h3>
                     <p>
-                        Grady files follow a strict format, very similar to Haskell.  Declaring a function is a two line process.  On the first line you must declare the function's name, followed by a semicolon, followed by the function's type.  The second line must also start with the function's name, followed by an equals sign and then the function's definition and a semicolon. For example:<br>
+                        Grady files follow a strict format, very similar to Haskell.  Declaring a function is a two line process.  On the first line you must declare the function's name, followed by a    colon, followed by the function's type.  The second line must also start with the function's name, followed by an equals sign and then the function's definition and a semicolon. For example:<br>
                         <p class="codeSnippet">
                             <code>
                                 true : ? -> ? -> ?<br>
@@ -158,11 +158,11 @@
                         </code>
                     </p>
                     <p>
-                        As you can see we have started a Grady file with importing another Grady filed named <strong>Naturals</strong>.  From here we have defined out Church-Encoded definition of true.  We are also able to use definitions from the <strong>Naturals</strong> file now.
+                        As you can see we have started a Grady file with importing another Grady filed named <strong>Naturals</strong>.  From here we have defined our Church-Encoded definition of true.  We are also able to use definitions from the <strong>Naturals</strong> file now.
                     </p>
                     <h3>Loading Grady Files</h3>
                     <p>
-                        Loading a Grady file into the Repl is done using the keyword <strong>:load (:l)</strong>, which is very similar to Haskell syntax.  You may load an external file of definitions using this command.  These files are requred to have the extention .gry.  The terms are all typedchecked and then added to the context where they are usable in the Repl.  The loading is done lazily, so if you have several definitions in your external file and the third one does not typecheck, the first two will still be loaded into the context.<br><br>
+                        Loading a Grady file into the Repl is done using the keyword <strong>:load (:l)</strong>, which is very similar to Haskell syntax.  You may load an external file of definitions using this command.  These files are requred to have the extention ".gry".  The terms are all typechecked and then added to the context where they are usable in the Repl.  The loading is done lazily, so if you have several definitions in your external file and the third one does not typecheck, the first two will still be loaded into the context.<br><br>
                         
                         A word of caution.  When loading a file into a Repl, realize that any values in the context will be overwritten by the values being loaded from the file.  For instance, if you load one file into the Repl and then a second file.  Only the items from the second file will be found in the context, as the items from the first file have been overwritten. For example lets assume we are in the Core Repl, let's import a file:
                     </p>
@@ -184,7 +184,7 @@
                         We can now see the contents from the file printed out.  You can access this same file, called Church-Encodings, from the Grady project <a targe="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/ChurchEncodings.gry">here</a>.  This file depends on another example file, Skeleton.gry, which can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/Skeleton.gry">here</a>.  The Skeleton file does not need to be added to the Repl but just in the same folder as the Church-Encodings file.  What happens is that since the Church-Encodings file depends on the Skeleton file, both are imported into the Repl.
                     </p>
                     <p>
-                        So let's see if we now add another file into the Repl and check then check the contents of the context.
+                        Now consider if we load a different file into the Repl.
                     </p>
                     <p class="codeSnippet">
                         <code>
@@ -194,7 +194,7 @@
                         </code>
                     </p>
                     <p>
-                        As you can see the previous contents have been overwritten and replaced with the definitions of the Pair file, which is also included in the project and can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/Pair.gry">here</a>.
+                        As you can see the previous contents of the context have been overwritten and replaced with the definitions of the Pair file; this is also included in the project and can be found <a target="blank" href="https://github.com/ct-gradual-typing/Grady/blob/master/Examples/Core/Pair.gry">here</a>.
                     </p>
                 </div>
             </div>
@@ -208,19 +208,19 @@
                                 Type: A -> B
                             </p>
                             <p>
-                                Syntax: \(x: A) -> t</p>
+                                Syntax: \(x: A) -> t
                             </p>
                         </div>
                         <h3>Function Application</h3>
                         <div class="section">
                             <p>
-                                Type: A
+                                Type: B
                             </p>
                             <p>
                                 Syntax: t<sub>1</sub> t<sub>2</sub></p>
                             </p>
                             <p>
-                                Where t<sub>1</sub> is a function that takes as an argument t<sub>2</sub> and returns an element of type A.
+                                Where t<sub>1</sub> : A -> B and t<sub>2</sub> : A.
                             </p>
                             <p class="example">
                                 Example:<br>
@@ -286,9 +286,6 @@
                         <p>
                             Syntax: unbox&lt;A&gt; t
                         </p>
-                        <p>
-                            Unboxing t will cast it from type ? to A.
-                        </p>
                     </div>
                     <h3>Splitting</h3>
                     <div class="section">
@@ -299,7 +296,6 @@
                             Syntax: split&lt;? -> ?&gt; t
                         </p>
                         <p>
-                            Splitting takes in a t of type ? and splits it into a function of type ? -> ?. <br>
                             <strong>Note: </strong>This is only used in the Core Repl.
                         </p>
                     </div>
@@ -312,7 +308,6 @@
                             Syntax: squash&lt;A&gt; t
                         </p>
                         <p>
-                            A is of type t.  Squash takes in a function and compresses it down to an element of type ?.  <br>
                             <strong>Note: </strong>This is only used in the Core Repl.
                         </p>
                     </div>
@@ -325,9 +320,6 @@
                     <div class="section">
                         <p>
                             Type: Nat
-                        </p>
-                        <p>
-                          This may be any natural number.  
                         </p>
                     </div>
                     <h3>Successor</h3>
@@ -348,18 +340,22 @@
                             Type: Nat
                         </p>
                         <p>
+                            Syntax: 0
+                        </p>
+                        <p>
                             The base of natural numbers.
                         </p>
                     </div>
                     <h3>Natural Number Eliminator</h3>
                     <div class="section">
                         <p>
-                            Type: Nat -> A
+                            Type: A
                         </p>
                         <p>
-                            Syntax: case t of 0 -> A, (succ A) -> A</strong>
+                            Syntax: case t of 0 -> t<sub>1</sub>, (succ x) -> t<sub>2</sub></strong>
                         </p>
                         <p>
+                            Where t : Nat, t<sub>1</sub> A, t<sub>2</sub> : Nat -> A
                             This allows the user to case split over natural numbers.
                         </p>
                     </div>
@@ -371,27 +367,14 @@
                     <h3>Pair</h3>
                     <div class="section">
                         <p>
-                            Type: (A,A)
+                            Type: (A,B)
                         </p>
                         <p>
                             Syntax: (t<sub>1</sub>,t<sub>2</sub>)
                         </p>
                         <p>
                             The pair type takes two terms and maintains them
-                           as a tuple.  The terms may be of different types.
-                        </p>
-                    </div>
-                    <h3>Product Type</h3>
-                    <div class="section">
-                        <p>
-                            Type: (A,A)
-                        </p>
-                        <p>
-                            Syntax: (A,A)
-                        </p>
-                        <p>
-                           The product type takes two types and maintains them
-                           as a tuple.  The types may be of different.
+                            as a tuple.  The terms may be of different types.
                         </p>
                     </div>
                     <h3>First Projection</h3>
@@ -400,22 +383,24 @@
                             Type: A
                         </p>
                         <p>
-                            Syntax: fst (t<sub>1</sub>,t<sub>2</sub>)
+                            Syntax: fst t
                         </p>
                         <p>
+                            Where t : (A,B)<br>
                             This returns the first projection of a pair.  In the above syntax, t<sub>1</sub> would be returned.
                         </p>
                     </div>
                     <h3>Second Projection</h3>
                     <div class="section">
                         <p>
-                            Type: A
+                            Type: B
                         </p>
                         <p>
-                            Syntax: snd (t<sub>1</sub>,t<sub>2</sub>)
+                            Syntax: snd t
                         </p>
                         <p>
-                            This returns the second projection of a pair.  In the above syntax, t<sub>2</sub> would be returned.
+                            Where t : (A,B)<br>
+                            This returns the second projection of a pair. 
                         </p>
                     </div>
                 </div>
@@ -426,7 +411,7 @@
                     <h3>Empty List</h3>
                     <div class="section">
                         <p>
-                            Type: List
+                            Type: List[A]
                         </p>
                         <p>
                             Syntax: []
@@ -435,7 +420,7 @@
                             An empty list is denoted as such.
                         </p>
                     </div>
-                    <h3>List Type</h3>
+                    <h3>Expanded Lists</h3>
                     <div class="section">
                         <p>
                             Type: [A]
@@ -444,7 +429,7 @@
                             Syntax: [t<sub>1</sub>,t<sub>2</sub>,...]
                         </p>
                         <p>
-                           In Grady you may use lists with items in the list separated by commas.  All items in the list must have the same type.
+                            Where each t<sub>i</sub> : A
                         </p>
                     </div>
                     <h3>Cons</h3>
@@ -453,21 +438,23 @@
                             Type: [A]
                         </p>
                         <p>
-                            Syntax: t<sub>1</sub>::[A]
+                            Syntax: t<sub>1</sub>::[ts]
                         </p>
                         <p>
+                            Where t : ...
                             Cons concatenates a term of a specific type with a list of terms of the same type.  So here t<sub>1</sub> must be of type A.
                         </p>
                     </div>
                     <h3>List Eliminator</h3>
                     <div class="section">
                     <p>
-                        Type: [A] -> B</p>
+                        Type: B</p>
                     </p>
                     <p>
                         Syntax: case t<sub>1</sub> of [] -> t<sub>2</sub>, (a::[a]) -> t<sub>3</sub>
                     </p>
                     <p>
+                        t2 list of A, t2 B, t3 A -> List A -> B
                         This allows the user to case split over lists.
                     </p>
                     </div>
@@ -478,9 +465,6 @@
                 <div class="container">
                     <h3>Term Variable Binding</h3>
                     <div class="section">
-                        <p>
-                            Type: ????
-                        </p>
                         <p>
                             Syntax: let x = t<sub>1</sub>
                         </p>
@@ -509,7 +493,7 @@
                             Syntax: :decvar (:dv) x : A
                         </p>
                         <p>
-                            To fully evaluate Church Encodings, one often needs a free variable like this.
+                            Used for testing purposes.
                         </p>
                     </div>
                 </div>
@@ -520,20 +504,14 @@
                     <h3>Simple</h3>
                     <div class="section">
                         <p>
-                            Type: ????
-                        </p>
-                        <p>
                             Syntax: Simple
                         </p>
                         <p>
-                           Universe of simple types
+                            This is the type bounds used to restrict to Simple types only, any non-polymorphic type.
                         </p>
                     </div>
                     <h3>Forall Type</h3>
                     <div class="section">
-                        <p>
-                            Type: ???
-                        </p>
                         <p>
                             Syntax: forall (X&lt;:A).B
                         </p>
@@ -560,27 +538,8 @@
                 </div>
             </div>
             <div id="atomicSection" class="command">
-                <h2>Other Atomic Types</h2>
+                <h2>Unit Type</h2>
                 <div class="container">
-                    <h3>Unit Type</h3>
-                    <div class="section">
-                        <p>
-                            Syntax: U
-                        </p>
-                        <p>
-                           The terminal object.
-                        </p>
-                    </div>
-                    <h3>Untyped Type</h3>
-                    <div class="section">
-                        <p>
-                            Syntax: ?
-                        </p>
-                        <p>
-                           This type represents an element in the untyped universe.
-                        </p>
-                    </div>
-                    <h3>Triv Type</h3>
                     <div class="section">
                         <p>
                             Type: Unit
@@ -589,7 +548,7 @@
                             Syntax: Triv
                         </p>
                         <p>
-                            Triv is the trivial program with type <strong>Unit</strong>.
+                           The terminal object.
                         </p>
                     </div>
                 </div>
