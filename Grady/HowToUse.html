@@ -8,16 +8,16 @@
         <script>
             $(document).ready(function(){
                 
-                $(".command").click(function(){
-                    $(this).find(".container").toggle();
+                $(".command h2").click(function(){
+                    $(this).parent().find(".container").toggle();
                     $(this).removeClass('hover');
                 });
                 
-                $(".command").mouseover(function(){
+                $(".command h2").mouseover(function(){
                     $(this).addClass('hover');
                 });
                 
-                $(".command").mouseout(function(){
+                $(".command h2").mouseout(function(){
                     $(this).removeClass('hover');
                 });
                 
