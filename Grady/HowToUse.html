@@ -140,6 +140,43 @@
                             At any time in the Repl use this command to exit the Repl.  If you are in either the Core or Surface Repl, you will be returned to the Main Repl.  If you were in the Main Repl already, you will exit the program.
                         </p>
                     </div>
+                    <h3>Term Variable Binding</h3>
+                    <div class="section">
+                        <p>
+                            Syntax: let x = t<sub>1</sub>
+                        </p>
+                        <p>
+                           Using the <strong>let</strong> keyword binds a term to a variable.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command. All bindings must typecheck.
+                        </p>
+                    </div>
+                    <h4>Loading Definitions and Type Checking Example</h4>
+                    <p class="example codeSnippet">
+                    <code>
+                        Core> let true = \(p:?)->\(q:?)->p<br>
+                        Core> :type true<br>
+                        ? -> ? -> ?<br>
+                        Core> let false = \(p:?)->\(q:?)->q<br>
+                        Core> :dump<br>
+                        ["let true = \\(p:?).\\(q:?).p","let false = \\(p:?).\\(q:?).q"]<br>
+                        Core> true<br>
+                        \(p:?).\(q:?).p
+                    </code>
+                    </p>
+                    <p>
+                        As you can see, we added the Church-Encoded definitions of true and false to the context.  We checked the type of true by using the <strong>:type</strong> command.  Then we examined whether true and false were actually added to the context by using the <strong>:dump</strong> command.  Lastly, we asked for the definition of true and the Repl responded by printing it out.
+                    </p>
+                    <h3>Free Variables</h3>
+                    <div class="section">
+                        <p>
+                            Type: A
+                        </p>
+                        <p>
+                            Syntax: :decvar (:dv) x : A
+                        </p>
+                        <p>
+                            Used for testing purposes.
+                        </p>
+                    </div>
                     <h3>Surface Repl</h3>
                     <p class="description">
                         The Surface Repl allows the programmer to omit type annotations in many scenarios. This makes the life of a programmer easier but obscures the detail of what is occuring at the lower level.
@@ -150,6 +187,15 @@
                             The commands for both the Core and Surface Repl are exactly the same.
                         </p>
                     </div>
+                    <h4>Surface Grady Example</h4>
+                    <p class="example codeSnippet">
+                    <code>Grady> :sg<br>
+                          Surface> let pred = \(n:Nat) -> case n of 0 -> 0, (succ n')-> n'<br>
+                          Surface> pred 8<br>
+                          7
+                    </code>
+                    </p>
+                    <p>Here we defined the predecessor function.</p>
                 </div>
             </div>
             <div id="gFiles" class="command">
@@ -458,44 +504,6 @@
                     </div>
                 </div>
             </div>
-            <div id="varSection" class="command">
-                <h2>Variables</h2>
-                <div class="container">
-                    <h3>Term Variable Binding</h3>
-                    <div class="section">
-                        <p>
-                            Syntax: let x = t<sub>1</sub>
-                        </p>
-                        <p>
-                           Using the <strong>let</strong> keyword binds a term to a variable.  The variable persists in the context and can be viewed using the <strong>:dump</strong> command. All bindings must typecheck.
-                        </p>
-                    </div>
-                    <h3>Type Variable Binding</h3>
-                    <div class="section">
-                        <p>
-                            Type: ????
-                        </p>
-                        <p>
-                            Syntax: \(X &lt;: A)
-                        </p>
-                        <p>
-                            This indicates that X is a subtype of the given type, A.
-                        </p>
-                    </div>
-                    <h3>Free Variables</h3>
-                    <div class="section">
-                        <p>
-                            Type: A
-                        </p>
-                        <p>
-                            Syntax: :decvar (:dv) x : A
-                        </p>
-                        <p>
-                            Used for testing purposes.
-                        </p>
-                    </div>
-                </div>
-            </div>
             <div id="polySection" class="command">
                 <h2>Bounded Polymorphism</h2>
                 <div class="container">
@@ -508,13 +516,16 @@
                             This is the type bounds used to restrict to Simple types only, any non-polymorphic type.
                         </p>
                     </div>
-                    <h3>Forall Type</h3>
+                    <h3>Typed Lamdbas</h3>
                     <div class="section">
+                        <p>
+                            Type: [A|X]C
+                        </p>
                         <p>
                             Syntax: forall (X&lt;:A).B
                         </p>
                         <p>
-                            This allows for universal quantification.
+                            Where t:Forall (X&lt;B).C and A is a subtype of B.
                         </p>
                         <p class="example">
                             Example:
@@ -531,6 +542,15 @@
                                 forall (X&lt;:?).(X -> X)
                                 </code>
                             </p>
+                        </p>
+                    </div>
+                    <h3>Type Variable Binding</h3>
+                    <div class="section">
+                        <p>
+                            Syntax: \(X &lt;: A)
+                        </p>
+                        <p>
+                            This indicates that X is a subtype of the given type, A.
                         </p>
                     </div>
                     <h3>Type Application</h3>
@@ -560,10 +580,10 @@
                     <h3>Top</h3>
                     <div class="section">
                         <p>
-                            Type: TODO
+                            Type: T
                         </p>
                         <p>
-                            Syntax: TODO
+                            All types are a subtype of Top.  For the definition of subtyping, please see the <a target="blank" href="https://github.com/ct-gradual-typing/Papers/blob/master/MFPS17/main.pdf">paper</a>.
                         </p>
                     </div>
                 </div>
