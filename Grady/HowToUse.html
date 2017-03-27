@@ -431,7 +431,7 @@
                         </p>
                         <p>
                             Where t : (A,B)<br>
-                            This returns the first projection of a pair.  In the above syntax, t<sub>1</sub> would be returned.
+                            This returns the first projection of a pair.  
                         </p>
                     </div>
                     <h3>Second Projection</h3>
@@ -485,20 +485,20 @@
                             Syntax: t<sub>1</sub>::[ts]
                         </p>
                         <p>
-                            Where t : ...
-                            Cons concatenates a term of a specific type with a list of terms of the same type.  So here t<sub>1</sub> must be of type A.
+                            Where t : A<br>
+                            Cons concatenates a term of a specific type with a list of terms of the same type. 
                         </p>
                     </div>
                     <h3>List Eliminator</h3>
                     <div class="section">
                     <p>
-                        Type: B</p>
+                        Type: B
                     </p>
                     <p>
                         Syntax: case t<sub>1</sub> of [] -> t<sub>2</sub>, (a::[a]) -> t<sub>3</sub>
                     </p>
                     <p>
-                        t2 list of A, t2 B, t3 A -> List A -> B
+                        t<sub>1</sub> : list of A, t<sub>2</sub> : B, t3 : A<br>
                         This allows the user to case split over lists.
                     </p>
                     </div>
@@ -555,9 +555,6 @@
                     </div>
                     <h3>Type Application</h3>
                     <div class="section">
-                        <p>
-                            Type: ???
-                        </p>
                         <p>
                             Syntax: [A]t
                         </p>
